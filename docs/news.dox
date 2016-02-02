@@ -17,6 +17,12 @@ GLFW now supports querying the localized name of printable keys with @ref
 glfwGetKeyName, either by key token or by scancode.
 
 
+@subsection news_32_waittimeout Wait for events with timeout
+
+GLFW now supports waiting for events for a set amount of time with @ref
+glfwWaitEventsTimeout.
+
+
 @section news_31 New features in 3.1
 
 These are the release highlights.  For a full list of changes see the

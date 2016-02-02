@@ -1882,6 +1882,26 @@ void _glfwPlatformWaitEvents(void)
     _glfwPlatformPollEvents();
 }
 
+void _glfwPlatformWaitEventsTimeout(double timeout)
+{
+    const double deadline = _glfwPlatformGetTime() + timeout;
+
+    while (!XPending(_glfw.x11.display))
+    {
+        const double remaining = deadline - _glfwPlatformGetTime();
+        if (remaining <= 0.0)
+            return;
+
+        const long seconds = (long) remaining;
+        const long microseconds = (long) ((remaining - seconds) * 1e6);
+        struct timeval tv = { seconds, microseconds };
+
+        selectDisplayConnection(&tv);
+    }
+
+    _glfwPlatformPollEvents();
+}
+
 void _glfwPlatformPostEmptyEvent(void)
 {
     XEvent event;
