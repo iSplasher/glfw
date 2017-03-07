@@ -27,6 +27,7 @@
 
 #ifndef _glfw3_internal_h_
 #define _glfw3_internal_h_
+#endif
 
 
 #if defined(_GLFW_USE_CONFIG_H)
@@ -805,35 +806,6 @@ void _glfwInputError(int error, const char* format, ...);
  */
 void _glfwInputDrop(_GLFWwindow* window, int count, const char** names);
 
-/*! @brief Notifies shared code of a joystick connection or disconnection.
- *  @param[in] jid The joystick that was connected or disconnected.
- *  @param[in] event One of `GLFW_CONNECTED` or `GLFW_DISCONNECTED`.
- *  @ingroup event
- */
-void _glfwInputJoystick(int jid, int event);
-
-/*! @brief Notifies shared code of the new value of a joystick axis.
- *  @param[in] jid The joystick whose axis to update.
- *  @param[in] axis The index of the axis to update.
- *  @param[in] value The new value of the axis.
- */
-void _glfwInputJoystickAxis(int jid, int axis, float value);
-
-/*! @brief Notifies shared code of the new value of a joystick button.
- *  @param[in] jid The joystick whose button to update.
- *  @param[in] button The index of the button to update.
- *  @param[in] value The new value of the button.
- */
-void _glfwInputJoystickButton(int jid, int button, char value);
-
-/*! @brief Notifies shared code of the new value of a joystick hat.
- *  @param[in] jid The joystick whose hat to update.
- *  @param[in] button The index of the hat to update.
- *  @param[in] value The new value of the hat.
- */
-void _glfwInputJoystickHat(int jid, int hat, char value);
-
-
 //========================================================================
 // Utility functions
 //========================================================================
@@ -919,30 +891,6 @@ _GLFWmonitor* _glfwAllocMonitor(const char* name, int widthMM, int heightMM);
   */
 void _glfwFreeMonitor(_GLFWmonitor* monitor);
 
-/*! @brief Returns an available joystick object with arrays and name allocated.
- *  @ingroup utility
-  */
-_GLFWjoystick* _glfwAllocJoystick(const char* name, int axisCount, int buttonCount, int hatCount);
-
-/*! @brief Frees arrays and name and flags the joystick object as unused.
- *  @ingroup utility
-  */
-void _glfwFreeJoystick(_GLFWjoystick* js);
-
 /*! @ingroup utility
  */
 GLFWbool _glfwIsPrintable(int key);
-
-/*! @ingroup utility
- */
-GLFWbool _glfwInitVulkan(int mode);
-
-/*! @ingroup utility
- */
-void _glfwTerminateVulkan(void);
-
-/*! @ingroup utility
- */
-const char* _glfwGetVulkanResultString(VkResult result);
-
-#endif // _glfw3_internal_h_
